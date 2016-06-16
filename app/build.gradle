@@ -1,0 +1,93 @@
+apply plugin: 'com.android.application'
+//apply plugin: 'io.fabric'
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+    defaultConfig {
+        applicationId "app.rk.food"
+        minSdkVersion 16
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions {
+        disable 'MissingTranslation'
+        checkReleaseBuilds false
+    }
+    sourceSets {
+        main {
+            res.srcDirs =
+                    [
+                            'src/main/res/layouts/dialog',
+                            'src/main/res/layouts/admin',
+                            'src/main/res/layouts/client',
+                            'src/main/res/layouts/welcome',
+                            'src/main/res/layouts',
+                            'src/main/res'
+                    ]
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE-FIREBASE.txt'
+        exclude 'META-INF/NOTICE'
+    }
+}
+// Fabric / Crashlytics
+//afterEvaluate {
+//    initFabricPropertiesIfNeeded()
+//}
+//
+//def initFabricPropertiesIfNeeded() {
+//    def propertiesFile = file('crashlytics.properties')
+//    if (!propertiesFile.exists()) {
+//        def commentMessage = 'This file is auto-generated from system environment variables.'
+//        ant.propertyfile(file: propertiesFile.path, comment: commentMessage) {
+//            entry(key: 'apiKey', value: "973c693a008b22f9737dc603f8aeca2bcb2ace99")
+//            entry(key: 'apiSecret', value: "10453c92729d6b1a5a82feae9fee4b680f7ba11ed616c827b731d2f95abe3911")
+//        }
+//    }
+//}
+//buildscript {
+//    repositories {
+//        mavenCentral()
+//        maven { url 'https://maven.fabric.io/public' }
+//    }
+//    dependencies{
+//        // The Fabric Gradle plugin uses an open ended version to react
+//        // quickly to Android tooling updates
+//        //noinspection GradleDynamicVersion
+//        classpath 'io.fabric.tools:gradle:1.+'
+//    }
+//}
+//repositories {
+//    mavenCentral()
+//    maven { url 'https://maven.fabric.io/public' }
+//}
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    //UI
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:design:23.4.0'
+    compile 'com.android.support:recyclerview-v7:23.4.0'
+    compile 'com.android.support:cardview-v7:23.4.0'
+
+    // Crash Reporting
+//    compile('com.crashlytics.sdk.android:crashlytics:2.5.6@aar') {
+//        transitive = true;
+//    }
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'org.ocpsoft.prettytime:prettytime:4.0.0.Final'
+
+    //Google Analytics
+    compile 'com.google.android.gms:play-services-analytics:9.0.2'
+    //Google Cloud Notification
+    compile 'com.google.android.gms:play-services-gcm:9.0.2'
+}
+apply plugin: 'com.google.gms.google-services'

@@ -1,0 +1,109 @@
+<resources>
+    <string name="app_name">Food World</string>
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Hello Food!</string>
+    <string name="slide_1_desc">The easiest way to order food from your favourite restaurant!</string>
+
+    <string name="slide_2_title">Enjoy Food</string>
+    <string name="slide_2_desc">Enjoy food with family and friends!</string>
+
+    <string name="slide_3_title">Great Discounts</string>
+    <string name="slide_3_desc">Best discounts on every single service we offer!</string>
+
+    <string name="slide_4_title">World Travel</string>
+    <string name="slide_4_desc">Book tickets of any transportation and travel the world!</string>
+
+    <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
+    <string name="play_again">Play Again</string>
+
+    <!--Main activity-->
+    <string name="toolbar_title"><b>Food</b>Menu</string>
+    <string name="search_box_hint">Search</string>
+    <string name="cart_empty">0</string>
+    <!--Navigation-->
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
+    <string name="nav_profile">Profile</string>
+    <string name="nav_my_home">Home</string>
+    <string name="nav_my_order">My Order</string>
+    <string name="nav_location">Location</string>
+    <string name="nav_setting">Settings</string>
+    <string name="nav_about_us">About US</string>
+
+    <!--Currency-->
+    <string name="india_rupee_symbol">\u20B9</string>
+    <string name="india_rupee">Rs</string>
+
+    <!--Food Item-->
+    <string name="add_to_cart">Add to cart</string>
+    <string name="money_dummy">000</string>
+    <string name="india_rupee_end_symbol">/-</string>
+    <string name="default_currency">Rs (Default Currency)</string>
+    <string name="request_button">Add money</string>
+    <string name="send_button">Send</string>
+    <string name="item_food_name">Food Name</string>
+    <string name="item_food_description">Food Description</string>
+
+    <!--Cart Food Item-->
+    <string name="cart_quantity_food_item">Qty.</string>
+    <string name="cart_quantity_dummy">1</string>
+    <!--Empty Cart layout-->
+    <string name="empty_cart">Empty Cart</string>
+    <string name="no_items">No Items</string>
+    <string name="no_items_in_cart">Its look like no items added in your cart</string>
+    <string name="browser_meal">Browser items</string>
+
+    <!--Cart Layout-->
+    <string name="coupon_code">NET20 (20% Off)</string>
+    <string name="checkout_sub_total">Sub total</string>
+    <string name="checkout_delivery">Delivery charge</string>
+    <string name="checkout_tax">Tax</string>
+    <string name="checkout_coupon">Coupon</string>
+    <string name="checkout_total">Total</string>
+    <string name="checkout_button">Proceed to checkout</string>
+
+    <!--Dialog-->
+    <string name="server_error">Sorry for the inconvenience.\n we are fixing a temporary glitch. Please re-try in mint.</string>
+    <string name="no_internet">Check your internet connection. Try again!</string>
+    <string name="success">Great !</string>
+    <string name="error">Oh snap !</string>
+    <string name="close">Close</string>
+    <string name="progress_wait">Please wait…</string>
+    <string name="progress_loading">Loading…</string>
+    <string name="progress_uploading">Uploading…</string>
+
+    <!--App Utils-->
+    <string name="category_support_development">Support development</string>
+    <string name="report_bugs">Report bugs</string>
+    <string name="report_bugs_subtitle">Report bugs or propose new features</string>
+    <string name="play_store">Rate on Play Store</string>
+    <string name="play_store_subtitle">Thanks for your support!</string>
+    <string name="email_developer">Email the developer</string>
+    <string name="email_developer_subtitle">Contact the developer directly</string>
+    <string name="email_subject">%s - Feedback</string>
+
+    <!--Share-->
+    <string name="working_on_it">Working on it</string>
+    <string name="no_app_found_title">Oops!</string>
+    <string name="no_app_found">No app found on your phone which can perform this action.</string>
+    <string name="chooser_sharing_intent">Share app using…</string>
+    <string name="chooser_email_intent">Send email using…</string>
+
+    <!--Android permission M & above -->
+    <string name="alert_permission">Permission Required</string>
+    <string name="alert_permission_account">App requires <b>Contact</b> permission \nenabled to use this feature. \n\n <i>app settings</i> &#62; <i>permissions</i> &#62; <b><i>contacts</i></b></string>
+    <string name="alert_permission_email_account">App requires <b>Account</b> permission \nenabled to use this feature. \n\n <i>app settings</i> &#62; <i>permissions</i> &#62; <b><i>contacts</i></b></string>
+    <string name="alert_permission_phone_state">App requires <b>Telephone</b> permission \nenabled to continue. \n\n<i>app settings</i> &#62; <i>permissions</i> &#62; <b><i>telephone</i></b></string>
+    <string name="alert_permission_camera">App requires <b>Camera &amp; Storage</b> permission \nenabled to use this feature. \n \n<i>app settings</i> &#62; <i>permissions</i> &#62; <b><i>camera &amp; storage</i></b></string>
+    <string name="alert_permission_sms">App requires <b>SMS</b> permission \nenabled to use this feature. \n\n <i>app settings</i> &#62; <i>permissions</i> &#62; <b><i>SMS</i></b></string>
+    <string name="alert_permission_location">App requires <b>Location</b> permission \nenabled to use this feature. \n\n <i>app settings</i> &#62; <i>permissions</i> &#62; <b><i>location</i></b></string>
+    <string name="alert_permission_open_setting">Open App Settings</string>
+    <string name="alert_permission_write_storage">App requires <b>Storage</b> permission \nenabled to use this feature. \n\n <i>app settings</i> &#62; <i>permissions</i> &#62; <b><i>storage</i></b></string>
+
+    <!--Others-->
+    <string name="feedback_email">feedback@foodies.com</string>
+</resources>

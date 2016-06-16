@@ -1,0 +1,38 @@
+{
+  "project_info": {
+    "project_number": "167343736328",
+    "project_id": "food-2987e"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:167343736328:android:36aaeb067b1aed04",
+        "android_client_info": {
+          "package_name": "app.rk.food"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMT_JKw3oF9gsnNLEz67-6cVu2XZGTOSI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-79399856-1"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

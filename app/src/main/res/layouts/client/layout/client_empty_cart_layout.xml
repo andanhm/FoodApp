@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_gravity="center"
+    android:background="@color/empty_cart_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:src="@drawable/food_empty_cart"
+        android:layout_width="@dimen/_120"
+        android:layout_height="@dimen/_120"
+        android:layout_margin="@dimen/_14"
+        android:contentDescription="@string/add_to_cart" />
+    <TextView
+        android:textColor="@color/text_view_cart"
+        android:gravity="center"
+        android:textSize="@dimen/_30"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/no_items"/>
+    <TextView
+        android:textSize="@dimen/_18"
+        android:gravity="center"
+        android:textColor="@color/text_view_cart_light"
+        android:text="@string/no_items_in_cart"
+        android:layout_margin="@dimen/_08"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_marginTop="@dimen/_06"
+        android:background="@color/colorPrimaryDark"
+        android:layout_width="@dimen/_60"
+        android:layout_height="@dimen/_04"/>
+    <TextView
+        android:id="@+id/textViewBrowserItem"
+        android:textSize="@dimen/_20"
+        android:clickable="true"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/colorAccent"
+        android:text="@string/browser_meal"
+        android:layout_marginTop="@dimen/_20"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

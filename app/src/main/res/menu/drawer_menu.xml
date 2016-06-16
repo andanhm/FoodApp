@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:checkableBehavior="single"
+        android:title="@string/nav_profile">
+        <item
+            android:id="@+id/menuMyHome"
+            android:icon="@drawable/ic_home_white_24dp"
+            android:title="@string/nav_my_home"/>
+
+        <item
+            android:id="@+id/menuMyOrder"
+            android:icon="@drawable/ic_reorder_white_24dp"
+            android:title="@string/nav_my_order"/>
+        <item
+            android:id="@+id/menuLocation"
+            android:icon="@drawable/ic_my_location_white_24dp"
+            android:title="@string/nav_location"/>
+        <item
+            android:id="@+id/menuSetting"
+            android:icon="@drawable/ic_settings_white_24dp"
+            android:title="@string/nav_setting"/>
+        <item
+            android:id="@+id/menuAboutUs"
+            android:icon="@drawable/ic_info_white_24dp"
+            android:title="@string/nav_about_us"/>
+        <!--<item-->
+            <!--android:id="@+id/navigation_subheader"-->
+            <!--android:title="@string/nav_sub_header">-->
+            <!--<menu>-->
+                <!--<item-->
+                    <!--android:id="@+id/navigation_sub_item_1"-->
+                    <!--android:icon="@drawable/ic_drawer_about"-->
+                    <!--android:title="@string/nav_sub_item_1" />-->
+                <!--<item-->
+                    <!--android:id="@+id/navigation_sub_item_2"-->
+                    <!--android:icon="@drawable/ic_drawer_home"-->
+                    <!--android:title="@string/nav_sub_item_2" />-->
+            <!--</menu>-->
+        <!--</item>-->
+    </group>
+
+</menu>
