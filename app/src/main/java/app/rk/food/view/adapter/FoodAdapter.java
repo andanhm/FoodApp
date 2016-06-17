@@ -26,9 +26,11 @@ import app.rk.food.view.activity.MainActivity;
  *
  */
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder>{
-    Activity mActivity;
-    List<FoodData> mFoodDataList;
-    TextView textViewCartItem;
+    private Activity mActivity;
+    private List<FoodData> mFoodDataList;
+    private TextView textViewCartItem;
+    private String TAG=getClass().getSimpleName();
+
     public FoodAdapter( Activity mActivity, List<FoodData> foodDataList) {
         this.mActivity = mActivity;
         this.mFoodDataList = foodDataList;
@@ -45,6 +47,13 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
     public void onBindViewHolder(final FoodViewHolder holder, int position) {
         try {
             final FoodData mFoodData=mFoodDataList.get(position);
+//            Log.e(TAG, "onBindViewHolder: "+MainActivity.mCartItemList.size()+":"+MainActivity.mCartItemList.contains(mFoodData));
+//            Log.e(TAG, "onBindViewHolder: "+MainActivity.mCartItemList.contains(mFoodData));
+//            if(!MainActivity.mCartItemList.contains(mFoodData)) {
+//                holder.linearLayoutAddToCart.setBackgroundResource(R.drawable.rounded_button_added_to_cart);
+//            } else {
+//                holder.linearLayoutAddToCart.setBackgroundResource(R.drawable.rounded_button_cart);
+//            }
             String mFoodName = mFoodData.getFoodName();
             String mFoodImage = mFoodData.getFoodImgURL();
             String mFoodDescription = mFoodData.getFoodDescription();

@@ -325,6 +325,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_50"
             android:layout_marginTop="@dimen/_08"
+            android:layout_marginBottom="@dimen/_20"
             android:background="@drawable/rounded_button_cart"
             android:drawableLeft="@drawable/ic_shopping_basket_white_48dp"
             android:paddingEnd="@dimen/_08"

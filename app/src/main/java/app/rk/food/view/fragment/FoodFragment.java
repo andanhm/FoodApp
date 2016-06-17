@@ -89,7 +89,7 @@ public class FoodFragment extends Fragment{
 
     public void setFoodAdapter() {
         try {
-            mFoodDataList = getmFoodDataList();
+            mFoodDataList = getFoodDataList();
             LinearLayoutManager layoutManager = new LinearLayoutManager(mActivity);
             layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
             recyclerViewFood.setLayoutManager(layoutManager);
@@ -99,9 +99,16 @@ public class FoodFragment extends Fragment{
         } catch (Exception e) {
             Log.printStackTrace(e);
         }
-
     }
-    private List<FoodData> getmFoodDataList(){
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setFoodAdapter();
+        Log.d(TAG, "onResume: ");
+    }
+
+    private List<FoodData> getFoodDataList(){
         List<FoodData> foodDataList=new ArrayList<>();
         FoodData mFoodOne=new FoodData();
         mFoodOne.setFoodId("1");

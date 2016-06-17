@@ -28,7 +28,7 @@ import app.rk.food.view.activity.MainActivity;
 public class FoodCartAdapter extends RecyclerView.Adapter<FoodCartAdapter.FoodCartViewHolder> {
     Activity mActivity;
     List<FoodData> mFoodDataList;
-
+    OnDataChangeListener mOnDataChangeListener;
     public FoodCartAdapter(Activity mActivity, List<FoodData> foodDataList) {
         this.mActivity = mActivity;
         this.mFoodDataList = foodDataList;
@@ -60,7 +60,9 @@ public class FoodCartAdapter extends RecyclerView.Adapter<FoodCartAdapter.FoodCa
             holder.imageButtonClose.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new Utility(mActivity).toast(mActivity.getString(R.string.working_on_it));
+                    mFoodDataList.remove(mFoodData);
+                    notifyDataSetChanged();
+                    doUpadteActions();
                 }
             });
             Glide.with(mActivity)
@@ -103,5 +105,17 @@ public class FoodCartAdapter extends RecyclerView.Adapter<FoodCartAdapter.FoodCa
             textViewQuantity = (TextView) itemView.findViewById(R.id.textViewQuantity);
             textViewFoodPrice = (TextView) itemView.findViewById(R.id.textViewFoodPrice);
         }
+    }
+    private void doUpadteActions() {
+        if(mOnDataChangeListener != null){
+            mOnDataChangeListener.onDataChanged(mFoodDataList.size());
+        }
+    }
+
+    public void setOnDataChangeListener(OnDataChangeListener onDataChangeListener){
+        mOnDataChangeListener = onDataChangeListener;
+    }
+    public interface OnDataChangeListener {
+         void onDataChanged(int size);
     }
 }
