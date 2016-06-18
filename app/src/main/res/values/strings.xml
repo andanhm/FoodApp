@@ -51,6 +51,8 @@
     <!--Cart Food Item-->
     <string name="cart_quantity_food_item">Qty.</string>
     <string name="cart_quantity_dummy">1</string>
+    <string name="number_picker_formatter">%02d</string>
+
     <!--Empty Cart layout-->
     <string name="empty_cart">Empty Cart</string>
     <string name="no_items">No Items</string>

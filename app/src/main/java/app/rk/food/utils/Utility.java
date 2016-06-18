@@ -2,6 +2,8 @@ package app.rk.food.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.IdRes;
+import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -10,25 +12,21 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import app.rk.food.R;
+import android.support.annotation.NonNull;
 
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 
 /**
  * Utility class
  */
 
 public class Utility {
-    /**
-     * Format the timestamp with SimpleDateFormat
-     */
-    public static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
+
     private Context mContext = null;
 
     /**
      * Public constructor that takes mContext for later use.Provides information about an application environment.
      */
-    public Utility(Context mContext) {
+    public Utility(@NonNull Context mContext) {
         this.mContext = mContext;
     }
     /**
@@ -36,7 +34,7 @@ public class Utility {
      * @param text     The text to show.  Can be formatted text.
      *
      */
-    public void toast(String text) {
+    public void toast(@NonNull String text) {
         Toast.makeText(mContext, text, Toast.LENGTH_LONG).show();
     }
     /**
@@ -44,22 +42,30 @@ public class Utility {
      * @param resId The new text for the Toast.
      *
      */
-    public void toast(int resId) {
+    public void toast(@StringRes int resId) {
         Toast.makeText(mContext, resId, Toast.LENGTH_LONG).show();
     }
     /**
      * Make a Snackbar to display a message
      * @param text     The text to show.  Can be formatted text.
      */
-    public void snackBar(String text) {
+    public void snackBar(@NonNull String text) {
         Snackbar.make(((Activity)mContext).findViewById(android.R.id.content), text, Snackbar.LENGTH_LONG).show();
+    }
+
+    /**
+     * Make a Snackbar to display a message
+     * @param resId The new text for the Snackbar.
+     */
+    public void snackBar(@StringRes int resId) {
+        Snackbar.make(((Activity)mContext).findViewById(android.R.id.content), resId, Snackbar.LENGTH_LONG).show();
     }
 
 
     /**
      * AlertDialog used to display if any intent provided not available
      */
-    public void noAppFound(final Activity activity) {
+    public void noAppFound(@NonNull final Activity activity) {
         try {
             AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
             LayoutInflater inflater = activity.getLayoutInflater();

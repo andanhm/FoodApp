@@ -9,6 +9,7 @@ package app.rk.food.model;
 public class User {
     private String name;
     private String email;
+    private String password;
     private boolean hasLoggedInWithPassword;
 
 
@@ -22,12 +23,13 @@ public class User {
      * Use this constructor to create new User.
      * Takes user name, email as params
      *
-     * @param name
-     * @param email
+     * @param name Username of the logged user
+     * @param email Email ID of the logged user
      */
-    public User(String name, String email) {
+    public User(String name, String email,String password) {
         this.name = name;
         this.email = email;
+        this.password=password;
         this.hasLoggedInWithPassword = false;
     }
 
@@ -42,7 +44,13 @@ public class User {
     public void setHasLoggedInWithPassword(boolean hasLoggedInWithPassword) {
         this.hasLoggedInWithPassword = hasLoggedInWithPassword;
     }
+    public String getPassword() {
+        return password;
+    }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
     public String getName() {
         return name;
     }

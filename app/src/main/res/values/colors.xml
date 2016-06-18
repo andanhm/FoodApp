@@ -19,6 +19,7 @@
 
     <color name="gray_light">#D9D9DD</color>
     <color name="gray_dark">#363637</color>
+    <color name="button_pressed">#66999999</color>
 
     <!--Empty cart layout-->
     <color name="empty_cart_background">#F2F2F2</color>

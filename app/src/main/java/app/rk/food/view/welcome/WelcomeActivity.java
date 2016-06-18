@@ -19,9 +19,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import app.rk.food.R;
+import app.rk.food.analytics.TrackingApp;
+import app.rk.food.analytics.TrackingUser;
 import app.rk.food.prefrences.AppPreference;
 import app.rk.food.view.activity.MainActivity;
 import app.rk.food.prefrences.Preferences;
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 
 public class WelcomeActivity extends AppCompatActivity {
 
@@ -34,6 +38,8 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
+
 
         // Checking for first time launch - before calling setContentView()
         prefManager = new AppPreference(this);
@@ -76,6 +82,7 @@ public class WelcomeActivity extends AppCompatActivity {
         btnSkip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                TrackingApp.logWelcomeScreen(false);
                 launchHomeScreen();
             }
         });
@@ -90,6 +97,7 @@ public class WelcomeActivity extends AppCompatActivity {
                     // move to next screen
                     viewPager.setCurrentItem(current);
                 } else {
+                    TrackingApp.logWelcomeScreen(true);
                     launchHomeScreen();
                 }
             }

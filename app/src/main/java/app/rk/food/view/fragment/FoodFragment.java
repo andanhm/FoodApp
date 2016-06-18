@@ -1,6 +1,7 @@
 package app.rk.food.view.fragment;
 
 import android.app.Activity;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -23,11 +24,12 @@ import app.rk.food.view.activity.MainActivity;
 import app.rk.food.view.adapter.FoodAdapter;
 import app.rk.food.model.FoodData;
 import app.rk.food.utils.Log;
+import app.rk.food.view.widget.BottomDialog;
 
 /**
  *
  */
-public class FoodFragment extends Fragment{
+public class FoodFragment extends Fragment {
     private RecyclerView recyclerViewFood;
     private SwipeRefreshLayout swipeRefreshLayoutFoodSwipe;
     private FoodAdapter foodAdapter;
@@ -35,20 +37,22 @@ public class FoodFragment extends Fragment{
     private ProgressDialog mProgressDialog;
     private Activity mActivity;
     private FrameLayout frameLayoutCheckout;
-    private String TAG=getClass().getSimpleName();
+    private String TAG = getClass().getSimpleName();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivity = getActivity();
-        mFoodDataList =new ArrayList<>();
+        mFoodDataList = new ArrayList<>();
         mProgressDialog = new ProgressDialog(mActivity);
         mProgressDialog.setCancelable(false);
         mProgressDialog.setMessage(getString(R.string.progress_loading));
     }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.client_food_layout,null);
+        return inflater.inflate(R.layout.client_food_layout, null);
 
     }
 
@@ -57,13 +61,13 @@ public class FoodFragment extends Fragment{
         super.onViewCreated(view, savedInstanceState);
         recyclerViewFood = (RecyclerView) view.findViewById(R.id.recyclerViewFood);
         swipeRefreshLayoutFoodSwipe = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayoutFoodSwipe);
-        frameLayoutCheckout=(FrameLayout)view.findViewById(R.id.frameLayoutCheckout);
+        frameLayoutCheckout = (FrameLayout) view.findViewById(R.id.frameLayoutCheckout);
         frameLayoutCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                FragmentTransaction mFragmentTransaction=getFragmentManager().beginTransaction();
-                if (MainActivity.mCartItemList.size()==0) {
+                FragmentTransaction mFragmentTransaction = getFragmentManager().beginTransaction();
+                if (MainActivity.mCartItemList.size() == 0) {
                     mFragmentTransaction.replace(R.id.containerView, new EmptyCartFragment(), TAG);
                 } else {
                     mFragmentTransaction.replace(R.id.containerView, new FoodCartFragment(), TAG);
@@ -108,9 +112,9 @@ public class FoodFragment extends Fragment{
         Log.d(TAG, "onResume: ");
     }
 
-    private List<FoodData> getFoodDataList(){
-        List<FoodData> foodDataList=new ArrayList<>();
-        FoodData mFoodOne=new FoodData();
+    private List<FoodData> getFoodDataList() {
+        List<FoodData> foodDataList = new ArrayList<>();
+        FoodData mFoodOne = new FoodData();
         mFoodOne.setFoodId("1");
         mFoodOne.setFoodName("Dosa");
         mFoodOne.setFoodDescription("Dosa will be available till 12 AM");
@@ -118,7 +122,7 @@ public class FoodFragment extends Fragment{
         mFoodOne.setFoodQuantity(1);
         mFoodOne.setFoodImgURL("http://www.namasteplaza.com/media/wysiwyg/Dosa/Masala-Dosa.jpg");
 
-        FoodData mFoodTwo=new FoodData();
+        FoodData mFoodTwo = new FoodData();
         mFoodTwo.setFoodId("2");
         mFoodTwo.setFoodName("Tea/Coffee");
         mFoodTwo.setFoodDescription("Tea/Coffee will be available till 12 PM");
@@ -126,7 +130,7 @@ public class FoodFragment extends Fragment{
         mFoodTwo.setFoodQuantity(2);
         mFoodTwo.setFoodImgURL("http://www.askdana.net/wp-content/uploads/2015/05/grandma-tea-cup.jpg");
 
-        FoodData mFoodThree=new FoodData();
+        FoodData mFoodThree = new FoodData();
         mFoodThree.setFoodId("3");
         mFoodThree.setFoodName("Anna Sambar");
         mFoodThree.setFoodDescription("Anna Sambhar will be available from 12 PM onwards");
@@ -134,7 +138,7 @@ public class FoodFragment extends Fragment{
         mFoodThree.setFoodQuantity(1);
         mFoodThree.setFoodImgURL("http://photos1.blogger.com/blogger/3627/3892/1600/DSC01462.2.jpg");
 
-        FoodData mFoodFour=new FoodData();
+        FoodData mFoodFour = new FoodData();
         mFoodFour.setFoodId("4");
         mFoodFour.setFoodName("Curd Rice");
         mFoodFour.setFoodDescription("Curd Rice will be available from 12 PM onwards");
@@ -147,5 +151,25 @@ public class FoodFragment extends Fragment{
         foodDataList.add(mFoodThree);
         foodDataList.add(mFoodFour);
         return foodDataList;
+    }
+
+    public void showPopUpDialog() {
+        new BottomDialog.Builder(mActivity)
+                .setTitle("Awesome!")
+                .setContent("Glad to see you like BottomDialogs! If you're up for it, we would really appreciate you reviewing us.")
+                .setPositiveText("Google Play")
+                .setNegativeText("Close")
+                .onPositive(new BottomDialog.ButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull BottomDialog dialog) {
+
+                    }
+                })
+                .onNegative(new BottomDialog.ButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull BottomDialog dialog) {
+
+                    }
+                }).show();
     }
 }

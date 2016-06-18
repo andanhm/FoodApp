@@ -2,128 +2,68 @@ package app.rk.food;
 
 import android.app.Activity;
 import android.app.Application;
+import android.os.Build;
+import android.os.StatFs;
 
-import com.google.android.gms.analytics.GoogleAnalytics;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.StandardExceptionParser;
-import com.google.android.gms.analytics.Tracker;
+import com.crashlytics.android.Crashlytics;
+import com.crashlytics.android.answers.Answers;
 
-import app.rk.food.analytics.AnalyticsApplication;
+import java.io.File;
+
+import app.rk.food.utils.Log;
+import io.fabric.sdk.android.Fabric;
 
 /**
  * Includes one-time initialization
  *
- * This is a subclass of {@link Application} used to provide shared objects for this app, such as
- * the {@link Tracker}.
+ * This is a subclass of {@link Application} used to provide shared objects for this app,
  */
 
 public class FoodApplication extends Application {
     public static final String TAG = FoodApplication.class.getSimpleName();
-    public Activity currentActivity;
+    public Activity mCurrentActivity;
     private static FoodApplication mFoodApplicationInstance;
+    private static final int MIN_DISK_CACHE_SIZE = 5 * 1024 * 1024;     // in bytes
+    private static final int MAX_DISK_CACHE_SIZE = 50 * 1024 * 1024;    // in bytes
+
     @Override
     public void onCreate() {
         super.onCreate();
 
         mFoodApplicationInstance=this;
-        /**
-         * Google Analytics will record any uncaught exception/ Tracking user functionality in your app.
-         * */
-        AnalyticsApplication.initialize(this);
-        AnalyticsApplication.getInstance().get(AnalyticsApplication.Target.APP);
-        AnalyticsApplication.getInstance().get(AnalyticsApplication.Target.APP).enableAutoActivityTracking(false);
+        Fabric.with(this, new Crashlytics(), new Answers());
+        Log.d(TAG, "APP LAUNCHED");
     }
-
-    public static synchronized FoodApplication getInstance() {
+    public static FoodApplication getInstance() {
         return mFoodApplicationInstance;
     }
 
-    public synchronized Tracker getGoogleAnalyticsTracker() {
-        AnalyticsApplication analyticsTrackers = AnalyticsApplication.getInstance();
-        return analyticsTrackers.get(AnalyticsApplication.Target.APP);
-    }
-
-    /***
-     * Tracking screen view
-     *
-     * @param screenName screen name to be displayed on GA dashboard
-     */
-    public void trackScreenView(String screenName) {
-        Tracker t = getGoogleAnalyticsTracker();
-        t.setScreenName(screenName);
-        t.send(new HitBuilders
-                .ScreenViewBuilder()
-                .build());
-
-        GoogleAnalytics.getInstance(this).dispatchLocalHits();
-    }
-
-    /***
-     * Tracking exception
-     *
-     * @param e exception to be tracked
-     */
-    public void trackException(Exception e) {
-        if (e != null) {
-            Tracker t = getGoogleAnalyticsTracker();
-
-            t.send(new HitBuilders.ExceptionBuilder()
-                    .setDescription(
-                            new StandardExceptionParser(this, null)
-                                    .getDescription(Thread.currentThread().getName(), e))
-                    .setFatal(false)
-                    .build()
-            );
+    private static long calculateDiskCacheSize(File dir) {
+        long size = MIN_DISK_CACHE_SIZE;
+        try {
+            StatFs statFs = new StatFs(dir.getAbsolutePath());
+            long available;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                available = statFs.getBlockCountLong() * statFs.getBlockSizeLong();
+            } else {
+                // checked at runtime
+                //noinspection deprecation
+                available = statFs.getBlockCount() * statFs.getBlockSize();
+            }
+            // Target 2% of the total space.
+            size = available / 50;
+        } catch (IllegalArgumentException ignored) {
         }
+        // Bound inside min/max size for disk cache.
+        return Math.max(Math.min(size, MAX_DISK_CACHE_SIZE), MIN_DISK_CACHE_SIZE);
     }
 
-    /***
-     * Tracking event
-     *
-     * @param category event category
-     * @param action   action of the event
-     * @param label    label
-     */
-    public void trackEvent(String category, String action, String label) {
-        Tracker t = getGoogleAnalyticsTracker();
-
-        // Build and send an Event.
-        t.send(new HitBuilders
-                .EventBuilder()
-                .setCategory(category)
-                .setAction(action)
-                .setLabel(label)
-                .build());
-        GoogleAnalytics.getInstance(this).dispatchLocalHits();
+    public Activity getmCurrentActivity(){
+        return mCurrentActivity;
     }
 
-    /***
-     * Tracking timing hit
-     *
-     * @param category event category
-     * @param label    label
-     * @param elapsedTime    time
-     */
-    public void trackTime(String category,String label,long elapsedTime) {
-        Tracker t = getGoogleAnalyticsTracker();
-
-        // Send a screen view.
-        t.send(new HitBuilders
-                .TimingBuilder()
-                .setCategory(category)
-                .setLabel(label)
-                .setValue(elapsedTime)
-                .setVariable("Duration")
-                .build());
-        GoogleAnalytics.getInstance(this).dispatchLocalHits();
-    }
-
-    public Activity getCurrentActivity(){
-        return  currentActivity;
-    }
-
-    public void setCurrentActivity(Activity currentActivity){
-        this.currentActivity = currentActivity;
+    public void setmCurrentActivity(Activity mCurrentActivity){
+        this.mCurrentActivity = mCurrentActivity;
     }
 
 }

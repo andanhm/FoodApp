@@ -4,10 +4,15 @@ import android.support.annotation.Nullable;
 
 import org.ocpsoft.prettytime.PrettyTime;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class DateTimeUtils {
-
+    /**
+     * Format the timestamp with SimpleDateFormat
+     */
+    public static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
     // 2114380800 seconds in epoch time == 01/01/2037 @ 12:00am (UTC)
     public static final Date FAR_FUTURE = new Date(2114380800L * 1000);
 

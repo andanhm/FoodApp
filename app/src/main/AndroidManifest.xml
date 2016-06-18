@@ -9,6 +9,7 @@
     <!-- [END gcm_permission] -->
 
     <application
+        android:name=".FoodApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -60,10 +61,9 @@
             android:name="app.rk.food.gcm.RegistrationIntentService"
             android:exported="false">
         </service>
-        <!--<meta-data-->
-            <!--android:name="io.fabric.ApiKey"-->
-            <!--android:value="973c693a008b22f9737dc603f8aeca2bcb2ace99"-->
-            <!--/>-->
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="973c693a008b22f9737dc603f8aeca2bcb2ace99" />
     </application>
 
 </manifest>
