@@ -1,5 +1,7 @@
 package app.rk.food.model;
 
+import java.util.Date;
+
 /**
  *
  */
@@ -8,10 +10,10 @@ public class FoodData {
             foodName,
             foodType,
             foodImgURL,
-            foodDescription;
+            foodDescription,
+            itemAddedCartTime;
     Double   foodPrice;
     Integer foodQuantity;
-
     public Integer getFoodQuantity() {
         return foodQuantity;
     }
@@ -66,5 +68,12 @@ public class FoodData {
 
     public void setFoodPrice(Double foodPrice) {
         this.foodPrice = foodPrice;
+    }
+    public String getCartAddedTime() {
+        return itemAddedCartTime;
+    }
+
+    public void setCartAddedTime(String itemAddedCartTime) {
+        this.itemAddedCartTime = itemAddedCartTime;
     }
 }

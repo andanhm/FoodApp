@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardViewFood"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -33,49 +34,39 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textViewFoodName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_06"
-                android:text="@string/item_food_name"
-                android:textAllCaps="true"
-                android:textColor="@color/primary_text"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textViewFoodDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_06"
-                android:text="@string/item_food_description"
-                android:textColor="@color/secondary_text" />
-
-
             <LinearLayout
-                android:gravity="end"
+                android:layout_margin="@dimen/_06"
+                android:weightSum="1"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_04"
-                android:layout_marginTop="@dimen/_04"
-                android:layout_marginRight="@dimen/_06"
-                android:layout_marginEnd="@dimen/_06"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_weight="0.7"
+                    android:id="@+id/textViewFoodName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/item_food_name"
+                    android:textAllCaps="true"
+                    android:textColor="@color/primary_text"
+                    android:textStyle="bold" />
+
                 <LinearLayout
-                    android:layout_gravity="center"
+                    android:layout_weight="0.3"
+                    android:gravity="end"
                     android:orientation="horizontal"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:text="@string/india_rupee_symbol"
                         android:textAllCaps="true"
+                        android:layout_marginLeft="@dimen/_04"
+                        android:layout_marginStart="@dimen/_04"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/_14"
                         android:textStyle="bold" />
-
                     <TextView
                         android:id="@+id/textViewFoodPrice"
                         android:layout_width="wrap_content"
@@ -86,29 +77,49 @@
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/_14"
                         android:textStyle="bold" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/_20"
-                        android:layout_marginRight="@dimen/_20"
-                        android:gravity="center"
-                        android:text="@string/india_rupee_end_symbol"
-                        android:textAllCaps="true"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/_14"
-                        android:textStyle="bold" />
                 </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textViewFoodDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/_06"
+                android:layout_marginEnd="@dimen/_06"
+                android:layout_marginStart="@dimen/_06"
+                android:layout_marginLeft="@dimen/_06"
+                android:text="@string/item_food_description"
+                android:textColor="@color/secondary_text" />
+
+
+            <LinearLayout
+                android:weightSum="2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_04"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+                <app.rk.food.view.widget.QuantityPicker
+                    xmlns:picker="http://schemas.android.com/apk/res-auto/"
+                    android:id="@+id/quantityPicker"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    picker:minQuantity="1"
+                    picker:maxQuantity="5"
+                    picker:textSize="6sp"
+                    picker:quantityColor="@color/colorPrimary"
+                    picker:buttonColor="@color/colorAccent"
+                    tools:ignore="SmallSp" />
+
 
                 <LinearLayout
+                    android:gravity="center"
                     android:id="@+id/linearLayoutAddToCart"
                     android:background="@drawable/rounded_button_cart"
                     android:orientation="horizontal"
-                    android:gravity="center"
-                    android:paddingLeft="@dimen/_06"
-                    android:paddingStart="@dimen/_06"
-                    android:paddingRight="@dimen/_20"
-                    android:paddingEnd="@dimen/_20"
-                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
                     android:layout_height="@dimen/_30">
                     <ImageView
                         android:layout_gravity="center"

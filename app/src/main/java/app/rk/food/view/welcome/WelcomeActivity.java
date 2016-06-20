@@ -40,7 +40,6 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
 
-
         // Checking for first time launch - before calling setContentView()
         prefManager = new AppPreference(this);
         if (!prefManager.getSharedPreferences(Preferences.PREFERENCE_WELCOME,Preferences.WELCOME_IS_FIRST_TIME_LAUNCH,false)) {
@@ -162,7 +161,9 @@ public class WelcomeActivity extends AppCompatActivity {
 
         }
     };
-
+    private void ex()  {
+        throw new NullPointerException() ;
+    }
     /**
      * Making notification bar transparent
      */

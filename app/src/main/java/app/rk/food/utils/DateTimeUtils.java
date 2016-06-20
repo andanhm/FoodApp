@@ -12,12 +12,18 @@ public class DateTimeUtils {
     /**
      * Format the timestamp with SimpleDateFormat
      */
-    public static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
-    // 2114380800 seconds in epoch time == 01/01/2037 @ 12:00am (UTC)
+    public static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+
     public static final Date FAR_FUTURE = new Date(2114380800L * 1000);
 
     private static final PrettyTime prettyTime = new PrettyTime();
-
+    /**
+     * To get the current time
+     * @return  the current time in yyyy-MM-dd HH:mm:ss
+     */
+    public static String getCurrentTime(){
+        return SIMPLE_DATE_FORMAT.format( new Date());
+    }
     public static long getEpochSeconds() {
         return System.currentTimeMillis() / 1000L;
     }

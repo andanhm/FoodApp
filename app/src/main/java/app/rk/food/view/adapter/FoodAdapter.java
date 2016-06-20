@@ -21,6 +21,7 @@ import app.rk.food.model.FoodData;
 import app.rk.food.utils.Log;
 import app.rk.food.utils.Utility;
 import app.rk.food.view.activity.MainActivity;
+import app.rk.food.view.widget.QuantityPicker;
 
 /**
  *
@@ -54,7 +55,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
 //            } else {
 //                holder.linearLayoutAddToCart.setBackgroundResource(R.drawable.rounded_button_cart);
 //            }
-            String mFoodName = mFoodData.getFoodName();
+            final String mFoodName = mFoodData.getFoodName();
             String mFoodImage = mFoodData.getFoodImgURL();
             String mFoodDescription = mFoodData.getFoodDescription();
             Double mFoodPrice = mFoodData.getFoodPrice();
@@ -73,7 +74,16 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
                 @Override
                 public void onClick(View v) {
                     if(!MainActivity.mCartItemList.contains(mFoodData)) {
-                        MainActivity.mCartItemList.add(mFoodData);
+                        FoodData _foodDate=new FoodData();
+                        _foodDate.setFoodId(mFoodData.getFoodId());
+                        _foodDate.setFoodName(mFoodData.getFoodName());
+                        _foodDate.setFoodType(mFoodData.getFoodType());
+                        _foodDate.setFoodImgURL(mFoodData.getFoodImgURL());
+                        _foodDate.setFoodDescription(mFoodData.getFoodDescription());
+                        _foodDate.setFoodPrice(mFoodData.getFoodPrice());
+                        _foodDate.setFoodQuantity(holder.quantityPicker.getQuantity());
+                        Log.d(TAG, "onClick: "+_foodDate.getFoodQuantity());
+                        MainActivity.mCartItemList.add(_foodDate);
                         holder.linearLayoutAddToCart.setBackgroundResource(R.drawable.rounded_button_added_to_cart);
                     }else {
                         MainActivity.mCartItemList.remove(mFoodData);
@@ -112,6 +122,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         TextView textViewFoodDescription;
         TextView textViewFoodPrice;
         LinearLayout linearLayoutAddToCart;
+        QuantityPicker quantityPicker;
         public FoodViewHolder(View itemView) {
             super(itemView);
             cardViewFood=(CardView)itemView.findViewById(R.id.cardViewFood);
@@ -120,6 +131,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             textViewFoodDescription = (TextView) itemView.findViewById(R.id.textViewFoodDescription);
             textViewFoodPrice = (TextView) itemView.findViewById(R.id.textViewFoodPrice);
             linearLayoutAddToCart = (LinearLayout) itemView.findViewById(R.id.linearLayoutAddToCart);
+            quantityPicker=(QuantityPicker)itemView.findViewById(R.id.quantityPicker);
         }
     }
 }

@@ -1,7 +1,6 @@
 package app.rk.food.view.adapter;
 
 import android.app.Activity;
-import android.media.Image;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -20,7 +18,6 @@ import app.rk.food.R;
 import app.rk.food.model.FoodData;
 import app.rk.food.utils.Log;
 import app.rk.food.utils.Utility;
-import app.rk.food.view.activity.MainActivity;
 
 /**
  *
@@ -47,8 +44,9 @@ public class FoodCartAdapter extends RecyclerView.Adapter<FoodCartAdapter.FoodCa
             String mFoodName = mFoodData.getFoodName();
             String mFoodImage = mFoodData.getFoodImgURL();
 //            String mFoodDescription = mFoodData.getFoodDescription();
-            Double mFoodPrice = mFoodData.getFoodPrice();
-
+            int mFoodQuantity=mFoodData.getFoodQuantity();
+            Double mFoodPrice = mFoodData.getFoodPrice()*mFoodQuantity;
+            holder.textViewQuantity.setText(String.valueOf(mFoodQuantity));
             holder.textViewCartFoodName.setText(mFoodName);
             holder.textViewFoodPrice.setText(String.valueOf(mFoodPrice));
             holder.cardViewCartFood.setOnClickListener(new View.OnClickListener() {
@@ -62,7 +60,7 @@ public class FoodCartAdapter extends RecyclerView.Adapter<FoodCartAdapter.FoodCa
                 public void onClick(View v) {
                     mFoodDataList.remove(mFoodData);
                     notifyDataSetChanged();
-                    doUpadteActions();
+                    doUpdateActions();
                 }
             });
             Glide.with(mActivity)
@@ -106,7 +104,7 @@ public class FoodCartAdapter extends RecyclerView.Adapter<FoodCartAdapter.FoodCa
             textViewFoodPrice = (TextView) itemView.findViewById(R.id.textViewFoodPrice);
         }
     }
-    private void doUpadteActions() {
+    private void doUpdateActions() {
         if(mOnDataChangeListener != null){
             mOnDataChangeListener.onDataChanged(mFoodDataList.size());
         }

@@ -16,7 +16,7 @@ import android.widget.ImageView;
 /**
  *
  */
-public class RoundImageView  extends ImageView {
+public class RoundImageView extends ImageView {
     public RoundImageView(Context context) {
         super(context);
     }
@@ -32,9 +32,7 @@ public class RoundImageView  extends ImageView {
     @Override
     public void setImageDrawable(Drawable drawable) {
         Bitmap b = ((BitmapDrawable) drawable).getBitmap();
-
         Bitmap roundBitmap = getCroppedBitmap(b);
-
         super.setImageDrawable(new BitmapDrawable(getResources(), roundBitmap));
     }
 
