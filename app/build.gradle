@@ -1,14 +1,16 @@
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
-repositories {
 
+repositories {
     maven { url 'https://maven.fabric.io/public' }
 }
+
+
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
     defaultConfig {
-        applicationId "app.rk.food"
+        applicationId "app.andanhm.foodapp"
         minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
@@ -44,14 +46,14 @@ android {
     }
     buildTypes {
         debug {
-            // Disable fabric build ID generation for debug builds
+            // disable crashlytics
+            buildConfigField "boolean", "USE_CRASHLYTICS", "false"
             ext.enableCrashlytics = false
-            // Only use this flag on builds you don't proguard or upload to beta-by-crashlytics
-            ext.alwaysUpdateBuildId = false
         }
         release {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            // enable crashlytics
+            buildConfigField "boolean", "USE_CRASHLYTICS", "true"
+            ext.enableCrashlytics = true
         }
     }
 
@@ -59,26 +61,11 @@ android {
         cruncherEnabled = false
     }
 }
-// Fabric / Crashlytics
-afterEvaluate {
-    initFabricPropertiesIfNeed()
-}
-
-def initFabricPropertiesIfNeed() {
-    def propertiesFile = file('fabric.properties')
-    if (!propertiesFile.exists()) {
-        def commentMessage = 'This file is auto-generated from system environment variables.'
-        ant.propertyfile(file: propertiesFile.path, comment: commentMessage) {
-            entry(key: 'apiKey', value: propertiesFile['FABRIC_API_KEY'])
-            entry(key: 'apiSecret', value: propertiesFile['FABRIC_API_SECRET'])
-        }
-    }
-}
 
 
 buildscript {
     dependencies {
-        classpath 'io.fabric.tools:gradle:1.21.7'
+        classpath 'io.fabric.tools:gradle:1.22.2'
     }
 
 
@@ -86,7 +73,6 @@ buildscript {
         mavenCentral()
         jcenter()
         maven { url 'https://maven.fabric.io/public' }
-
     }
 }
 /*
@@ -94,9 +80,9 @@ buildscript {
 * */
 ext {
     supportLibraryVersion = '25.3.1'
-    googlePlayServiceVersion='10.2.6'
     quantityPicker='1.1.0'
     glide='3.7.0'
+    firebaseAppIndexing='10.2.6'
     prettytime='4.0.0.Final'
 }
 dependencies {
@@ -109,10 +95,8 @@ dependencies {
     compile "com.github.bumptech.glide:glide:$glide"
     compile "org.ocpsoft.prettytime:prettytime:$prettytime"
     compile "com.andanhm.quantitypicker:quantitypicker:$quantityPicker"
-    //Google Cloud Notification
-    compile "com.google.android.gms:play-services-gcm:$googlePlayServiceVersion"
-    compile('com.crashlytics.sdk.android:crashlytics:2.5.7@aar') {
+    compile "com.google.firebase:firebase-appindexing:$firebaseAppIndexing"
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
         transitive = true;
     }
 }
-apply plugin: 'com.google.gms.google-services'

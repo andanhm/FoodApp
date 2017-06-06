@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="app.rk.food" >
+    package="app.andanhm.foodworld" >
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-        android:name=".FoodApplication"
+        android:name="app.andanhm.foodworld.FoodApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,15 +14,20 @@
         android:windowSoftInputMode="stateHidden"
         android:theme="@style/AppTheme"
         android:fullBackupContent="true">
-        <activity android:name="app.rk.food.view.welcome.WelcomeActivity" >
+        <activity android:name="app.andanhm.foodworld.view.welcome.WelcomeActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http"
+                    android:host="andanhm.in"
+                    android:pathPrefix="/foodapp" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.MainActivity"/>
-
+        <activity android:name="app.andanhm.foodworld.view.activity.MainActivity"/>
     </application>
 
 </manifest>

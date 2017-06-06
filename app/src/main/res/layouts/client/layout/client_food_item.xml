@@ -99,7 +99,7 @@
                 android:layout_margin="@dimen/_04"
                 android:layout_gravity="center"
                 android:orientation="horizontal">
-                <app.rk.food.view.widget.QuantityPicker
+                <app.andanhm.foodworld.view.widget.QuantityPicker
                     xmlns:picker="http://schemas.android.com/apk/res-auto/"
                     android:id="@+id/quantityPicker"
                     android:layout_weight="1"

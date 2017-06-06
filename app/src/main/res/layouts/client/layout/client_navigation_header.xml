@@ -5,7 +5,7 @@
     android:background="@drawable/nav_background"
     android:orientation="vertical">
 
-    <app.rk.food.view.widget.RoundImageView
+    <app.andanhm.foodworld.view.widget.RoundImageView
         android:id="@+id/imageViewNavigationDrawer"
         android:layout_width="@dimen/_100"
         android:layout_height="@dimen/_100"
