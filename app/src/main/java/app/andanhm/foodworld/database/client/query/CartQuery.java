@@ -30,7 +30,7 @@ class CartQuery extends DBHandler {
      * @return int the number of rows in the building database.
      */
     public int getCartCount() {
-        String countQuery = String.format("SELECT  * FROM %s",TABLE);
+        String countQuery = String.format("SELECT * FROM %s",TABLE);
         Cursor cursor = database.rawQuery(countQuery, null);
         int count=cursor.getCount();
         cursor.close();
@@ -42,7 +42,7 @@ class CartQuery extends DBHandler {
      * @return No of rows if it available else 0
      */
     public int isProductInCart(String productId) {
-        String selectQuery = String.format("SELECT  * FROM %s WHERE %s = %s",TABLE,CartTable.PRODUCT_ID,productId);
+        String selectQuery = String.format("SELECT * FROM %s WHERE %s = %s",TABLE,CartTable.PRODUCT_ID,productId);
         Cursor cursor = database.rawQuery(selectQuery, null);
         int count=cursor.getCount();
         cursor.close();
@@ -123,7 +123,7 @@ class CartQuery extends DBHandler {
      * @return Cart product details
      */
     public FoodData getCartDetailsByID(String productId){
-        String selectQuery = String.format("SELECT  * FROM %s WHERE %s = %s",TABLE,CartTable.PRODUCT_ID,productId);
+        String selectQuery = String.format("SELECT * FROM %s WHERE %s = %s",TABLE,CartTable.PRODUCT_ID,productId);
         FoodData foodData = new FoodData();
         Cursor cursor = database.rawQuery(selectQuery, null);
         try {

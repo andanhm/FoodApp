@@ -18,17 +18,16 @@ public class CartTable {
     public static final String CART_ADD_TIME = "add_time";
 
     public static String getCartTableQuery() {
-        return
-                "CREATE TABLE " + CART_TABLE +
-                        "(" +
-                        PRODUCT_ID + " TEXT," +
-                        PRODUCT_NAME + " TEXT NOT NULL," +
-                        PRODUCT_DESCRIPTION + " TEXT," +
-                        PRODUCT_IMG_URL + " TEXT," +
-                        PRODUCT_TYPE + " TEXT," +
-                        PRODUCT_PRICE + " REAL NOT NULL," +
-                        PRODUCT_QUANTITY + " INT NOT NULL," +
-                        CART_ADD_TIME + " CHAR(30)" +
-                        ");";
+
+        return String.format("CREATE TABLE %s (%s TEXT, %s TEXT NOT NULL, %s TEXT,%s TEXT,%s TEXT,%s REAL TEXT NOT TEXT,%s INT NOT NULL,%s TEXT",
+                        CART_TABLE,
+                        PRODUCT_ID,
+                        PRODUCT_NAME,
+                        PRODUCT_DESCRIPTION,
+                        PRODUCT_IMG_URL,
+                        PRODUCT_TYPE,
+                        PRODUCT_PRICE,
+                        PRODUCT_QUANTITY,
+                        CART_ADD_TIME);
     }
 }
