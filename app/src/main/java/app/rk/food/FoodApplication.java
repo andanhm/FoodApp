@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Build;
 import android.os.StatFs;
+import android.os.StrictMode;
 
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.core.CrashlyticsCore;
 
 import java.io.File;
 
@@ -31,7 +33,29 @@ public class FoodApplication extends Application {
         super.onCreate();
 
         mFoodApplicationInstance=this;
-        Fabric.with(this, new Crashlytics(), new Answers());
+        //Fabric.with(this, new Crashlytics(), new Answers());
+        //Disable fabric in debug
+        Crashlytics crashlytics = new Crashlytics.Builder()
+                .core(new CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build())
+                .build();
+
+        final Fabric fabric = new Fabric.Builder(this)
+                .kits(crashlytics,new Answers())
+                .debuggable(true)
+                .build();
+
+        Fabric.with(fabric);
+
+        if (BuildConfig.DEBUG) {
+            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+                    .detectAll()
+                    .penaltyLog()
+                    .build());
+            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+                    .detectAll()
+                    .penaltyLog()
+                    .build());
+        }
         Log.d(TAG, "APP LAUNCHED");
     }
     public static FoodApplication getInstance() {

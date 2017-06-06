@@ -65,7 +65,7 @@ public class Utility {
     /**
      * AlertDialog used to display if any intent provided not available
      */
-    public void noAppFound(@NonNull final Activity activity) {
+    void noAppFound(@NonNull final Activity activity) {
         try {
             AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
             LayoutInflater inflater = activity.getLayoutInflater();

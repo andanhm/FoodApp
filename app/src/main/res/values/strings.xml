@@ -97,15 +97,15 @@
 
     <!--Android permission M & above -->
     <string name="alert_permission">Permission Required</string>
-    <string name="alert_permission_account">App requires <b>Contact</b> permission \nenabled to use this feature. \n\n <i>app settings</i> &#62; <i>permissions</i> &#62; <b><i>contacts</i></b></string>
-    <string name="alert_permission_email_account">App requires <b>Account</b> permission \nenabled to use this feature. \n\n <i>app settings</i> &#62; <i>permissions</i> &#62; <b><i>contacts</i></b></string>
-    <string name="alert_permission_phone_state">App requires <b>Telephone</b> permission \nenabled to continue. \n\n<i>app settings</i> &#62; <i>permissions</i> &#62; <b><i>telephone</i></b></string>
-    <string name="alert_permission_camera">App requires <b>Camera &amp; Storage</b> permission \nenabled to use this feature. \n \n<i>app settings</i> &#62; <i>permissions</i> &#62; <b><i>camera &amp; storage</i></b></string>
-    <string name="alert_permission_sms">App requires <b>SMS</b> permission \nenabled to use this feature. \n\n <i>app settings</i> &#62; <i>permissions</i> &#62; <b><i>SMS</i></b></string>
-    <string name="alert_permission_location">App requires <b>Location</b> permission \nenabled to use this feature. \n\n <i>app settings</i> &#62; <i>permissions</i> &#62; <b><i>location</i></b></string>
+    <string name="alert_permission_account">App requires <b>Contact</b> permission \n enabled to use this feature. \n\n <i>app settings</i> &#62; <i>permissions</i> &#62; <b><i>contacts</i></b></string>
+    <string name="alert_permission_email_account">App requires <b>Account</b> permission \n enabled to use this feature. \n\n <i>app settings</i> &#62; <i>permissions</i> &#62; <b><i>contacts</i></b></string>
+    <string name="alert_permission_phone_state">App requires <b>Telephone</b> permission \n enabled to continue. \n\n<i>app settings</i> &#62; <i>permissions</i> &#62; <b><i>telephone</i></b></string>
+    <string name="alert_permission_camera">App requires <b>Camera &amp; Storage</b> permission \n enabled to use this feature. \n \n<i>app settings</i> &#62; <i>permissions</i> &#62; <b><i>camera &amp; storage</i></b></string>
+    <string name="alert_permission_sms">App requires <b>SMS</b> permission \n enabled to use this feature. \n\n <i>app settings</i> &#62; <i>permissions</i> &#62; <b><i>SMS</i></b></string>
+    <string name="alert_permission_location">App requires <b>Location</b> permission \n enabled to use this feature. \n\n <i>app settings</i> &#62; <i>permissions</i> &#62; <b><i>location</i></b></string>
     <string name="alert_permission_open_setting">Open App Settings</string>
-    <string name="alert_permission_write_storage">App requires <b>Storage</b> permission \nenabled to use this feature. \n\n <i>app settings</i> &#62; <i>permissions</i> &#62; <b><i>storage</i></b></string>
+    <string name="alert_permission_write_storage">App requires <b>Storage</b> permission \n enabled to use this feature. \n\n <i>app settings</i> &#62; <i>permissions</i> &#62; <b><i>storage</i></b></string>
 
     <!--Others-->
-    <string name="feedback_email">feedback@foodies.com</string>
+    <string name="feedback_email">me@andanhm.in</string>
 </resources>

@@ -105,9 +105,9 @@
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    picker:minQuantity="1"
+                    picker:minQuantity="0"
                     picker:maxQuantity="5"
-                    picker:textSize="6sp"
+                    picker:textSize="10sp"
                     picker:quantityColor="@color/colorPrimary"
                     picker:buttonColor="@color/colorAccent"
                     tools:ignore="SmallSp" />

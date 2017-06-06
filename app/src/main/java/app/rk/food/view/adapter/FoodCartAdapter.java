@@ -86,7 +86,7 @@ public class FoodCartAdapter extends RecyclerView.Adapter<FoodCartAdapter.FoodCa
         return (null != mFoodDataList ? mFoodDataList.size() : 0);
     }
 
-    public class FoodCartViewHolder extends RecyclerView.ViewHolder {
+     class FoodCartViewHolder extends RecyclerView.ViewHolder {
         CardView cardViewCartFood;
         TextView textViewCartFoodName;
         ImageView imageViewCartFood;
@@ -94,7 +94,7 @@ public class FoodCartAdapter extends RecyclerView.Adapter<FoodCartAdapter.FoodCa
         TextView textViewQuantity;
         ImageButton imageButtonClose;
 
-        public FoodCartViewHolder(View itemView) {
+         FoodCartViewHolder(View itemView) {
             super(itemView);
             cardViewCartFood = (CardView) itemView.findViewById(R.id.cardViewCartFood);
             textViewCartFoodName = (TextView) itemView.findViewById(R.id.textViewCartFoodName);

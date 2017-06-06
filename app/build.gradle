@@ -1,17 +1,16 @@
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
-
 repositories {
+
     maven { url 'https://maven.fabric.io/public' }
 }
-
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.3"
     defaultConfig {
         applicationId "app.rk.food"
         minSdkVersion 16
-        targetSdkVersion 23
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
     }
@@ -43,6 +42,22 @@ android {
         exclude 'META-INF/LICENSE-FIREBASE.txt'
         exclude 'META-INF/NOTICE'
     }
+    buildTypes {
+        debug {
+            // Disable fabric build ID generation for debug builds
+            ext.enableCrashlytics = false
+            // Only use this flag on builds you don't proguard or upload to beta-by-crashlytics
+            ext.alwaysUpdateBuildId = false
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    aaptOptions {
+        cruncherEnabled = false
+    }
 }
 // Fabric / Crashlytics
 afterEvaluate {
@@ -54,29 +69,35 @@ def initFabricPropertiesIfNeed() {
     if (!propertiesFile.exists()) {
         def commentMessage = 'This file is auto-generated from system environment variables.'
         ant.propertyfile(file: propertiesFile.path, comment: commentMessage) {
-            entry(key: 'apiKey', value: "973c693a008b22f9737dc603f8aeca2bcb2ace99")
-            entry(key: 'apiSecret', value: "10453c92729d6b1a5a82feae9fee4b680f7ba11ed616c827b731d2f95abe3911")
+            entry(key: 'apiKey', value: propertiesFile['FABRIC_API_KEY'])
+            entry(key: 'apiSecret', value: propertiesFile['FABRIC_API_SECRET'])
         }
     }
 }
+
 
 buildscript {
     dependencies {
         classpath 'io.fabric.tools:gradle:1.21.7'
     }
 
+
     repositories {
         mavenCentral()
         jcenter()
         maven { url 'https://maven.fabric.io/public' }
+
     }
 }
 /*
 * Don't use 23.+ - always use complete version number eg: 23.4.0
 * */
 ext {
-    supportLibraryVersion = '23.4.0'
-    googlePlayServiceVersion='9.0.2'
+    supportLibraryVersion = '25.3.1'
+    googlePlayServiceVersion='10.2.6'
+    quantityPicker='1.1.0'
+    glide='3.7.0'
+    prettytime='4.0.0.Final'
 }
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -85,9 +106,9 @@ dependencies {
     compile "com.android.support:design:$supportLibraryVersion"
     compile "com.android.support:recyclerview-v7:$supportLibraryVersion"
     compile "com.android.support:cardview-v7:$supportLibraryVersion"
-    compile "com.github.bumptech.glide:glide:3.7.0"
-    compile "org.ocpsoft.prettytime:prettytime:4.0.0.Final"
-
+    compile "com.github.bumptech.glide:glide:$glide"
+    compile "org.ocpsoft.prettytime:prettytime:$prettytime"
+    compile "com.andanhm.quantitypicker:quantitypicker:$quantityPicker"
     //Google Cloud Notification
     compile "com.google.android.gms:play-services-gcm:$googlePlayServiceVersion"
     compile('com.crashlytics.sdk.android:crashlytics:2.5.7@aar') {

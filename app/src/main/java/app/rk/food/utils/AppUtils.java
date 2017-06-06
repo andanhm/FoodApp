@@ -15,8 +15,7 @@ import app.rk.food.R;
 public class AppUtils {
 
     public static void emailDeveloper(@NonNull Context mContext) {
-        String emailSubject = String.format(mContext.getString(R.string.email_subject),
-                mContext.getString(R.string.app_name));
+        String emailSubject = String.format(mContext.getString(R.string.email_subject),mContext.getString(R.string.app_name));
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse("mailto:")); // only email apps should handle this
         intent.putExtra(Intent.EXTRA_EMAIL, new String[] { "vickychijwani@gmail.com" });

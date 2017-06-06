@@ -2,6 +2,7 @@ package app.rk.food.view.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -70,6 +72,12 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
 
                 }
             });
+            holder.quantityPicker.setOnQuantityChangeListener(new QuantityPicker.OnQuantityChangeListener() {
+                @Override
+                public void onValueChanged(int quantity) {
+                    Toast.makeText(mActivity,String.valueOf(quantity),Toast.LENGTH_SHORT).show();
+                }
+            });
             holder.linearLayoutAddToCart.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -115,7 +123,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         return (null != mFoodDataList ? mFoodDataList.size() : 0);
     }
 
-    public  class FoodViewHolder extends RecyclerView.ViewHolder {
+     class FoodViewHolder extends RecyclerView.ViewHolder {
         CardView cardViewFood;
         TextView textViewFoodName;
         ImageView imageViewFood;
@@ -123,7 +131,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         TextView textViewFoodPrice;
         LinearLayout linearLayoutAddToCart;
         QuantityPicker quantityPicker;
-        public FoodViewHolder(View itemView) {
+        FoodViewHolder(View itemView) {
             super(itemView);
             cardViewFood=(CardView)itemView.findViewById(R.id.cardViewFood);
             textViewFoodName = (TextView) itemView.findViewById(R.id.textViewFoodName);

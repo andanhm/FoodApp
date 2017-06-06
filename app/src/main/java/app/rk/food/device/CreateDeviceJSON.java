@@ -15,10 +15,10 @@ import org.json.JSONObject;
  * <h1>Get the device information</h1>
  */
 
-public class CreateDeviceJSON {
+class CreateDeviceJSON {
 
     Context mContext;
-
+    private static String TAG=CreateDeviceJSON.class.getSimpleName();
     public CreateDeviceJSON(Context mContext) {
         this.mContext = mContext;
     }
@@ -178,6 +178,7 @@ public class CreateDeviceJSON {
             }
             return contactList;
         }catch (Exception e){
+            Log.e(TAG, String.format("%s : %s", new Object(){}.getClass().getEnclosingMethod().getName(), e.getMessage()));
         }
         return null;
     }

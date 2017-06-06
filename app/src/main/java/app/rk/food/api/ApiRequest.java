@@ -2,9 +2,13 @@ package app.rk.food.api;
 
 import android.content.Context;
 
+import app.rk.food.R;
 import app.rk.food.prefrences.UserSession;
 import app.rk.food.utils.Log;
+
+import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -14,9 +18,9 @@ import java.net.URLEncoder;
 import java.util.Map;
 
 /**
- * An HTTP class used to send and receive data over the web. Data may be of any type and length. This class may
+ * An Api Request HTTP class used to send and receive data over the web. Data may be of any type and length. This class may
  * be used to send and receive streaming data whose length is not known in advance.
- *
+ * <p>
  * The status code of the response obtained from the HTTP request.
  * <li>1xx: Informational</li>
  * <li>2xx: Success</li>
@@ -25,8 +29,11 @@ import java.util.Map;
  * <li>5xx: Server Error</li>
  * </p>
  */
-public class HTTPMethod {
-    private String mEmail,mToken;
+@SuppressWarnings("unused")
+public class ApiRequest {
+    private static String TAG = ApiRequest.class.getSimpleName();
+    private String mToken;
+    private Context mContext;
     /**
      * Sets the maximum time in milliseconds to wait while connecting.
      * Connecting to a server will fail with a {@link SocketTimeoutException} if
@@ -34,29 +41,31 @@ public class HTTPMethod {
      * of {@code 0} causes us to do a blocking connect. This does not mean we
      * will never time out, but it probably means you'll get a TCP timeout
      * after several minutes.
-     * */
-    private static int ConnectTimeout=8000;
+     */
+    private static int ConnectTimeout = 8000;
+
     /**
      * Constructor
      * Encrypt the email , token for server identification
      */
-    public HTTPMethod(Context mContext){
-        mEmail= UserSession.getAuthUser(mContext);
-        mToken= UserSession.getAuthToken(mContext);
+    public ApiRequest(Context mContext) {
+        this.mContext = mContext;
+        mToken = UserSession.getAuthToken(mContext);
     }
+
     /**
      * Method allows to HTTP GET request to the server to get data from a specified resource
-     * @param REQUEST_URL URL of the API to be requested
-     * returns response as a JSON object
+     *
+     * @param requestUrl URL of the API to be requested
+     *                   returns response as a JSON object
      */
-    public JSONObject get(String REQUEST_URL) {
+    public JSONObject GET(String requestUrl) {
         JSONObject jsonObject = null;
         BufferedReader reader = null;
         try {
-            URL url = new URL(REQUEST_URL);
+            URL url = new URL(requestUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            connection.setRequestProperty("Auth-User", mEmail);
             connection.setRequestProperty("Auth-Token", mToken);
             connection.setConnectTimeout(ConnectTimeout);
             connection.setRequestMethod("GET");
@@ -80,26 +89,28 @@ public class HTTPMethod {
                 try {
                     reader.close();
                 } catch (Exception e) {
-                    Log.printStackTrace(e);
+                    Log.e(TAG, String.format("%s : %s", new Object(){}.getClass().getEnclosingMethod().getName(), e.getMessage()));
                 }
             }
         }
-        return jsonObject;
+        return jsonObject != null ? jsonObject : errorObj();
     }
+
     /**
      * Method allows to HTTP POST request to the server to send data to a specified resource
-     * @param REQUEST_URL URL of the API to be requested
-     * @param PARAMS parameter that are to be send in the "body" of the request Ex: parameter=value&amp;also=another
-     * returns response as a JSON object
+     *
+     * @param requestUrl URL of the API to be requested
+     * @param params     parameter that are to be send in the "body" of the request Ex: parameter=value&amp;also=another
+     *                   returns response as a JSON object
      */
-    public JSONObject post(String REQUEST_URL,Map<String, Object> PARAMS) {
+    public JSONObject POST(String requestUrl, Map<String, Object> params) {
         JSONObject jsonObject = null;
         BufferedReader reader = null;
         try {
-            URL url = new URL(REQUEST_URL);
+            URL url = new URL(requestUrl);
             StringBuilder postData = new StringBuilder();
 
-            for (Map.Entry<String, Object> param : PARAMS.entrySet()) {
+            for (Map.Entry<String, Object> param : params.entrySet()) {
                 if (postData.length() != 0) postData.append('&');
                 postData.append(URLEncoder.encode(param.getKey(), "UTF-8"));
                 postData.append('=');
@@ -109,7 +120,6 @@ public class HTTPMethod {
 
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            connection.setRequestProperty("Auth-User", mEmail);
             connection.setRequestProperty("Auth-Token", mToken);
             connection.setConnectTimeout(ConnectTimeout);
             connection.setRequestMethod("POST");
@@ -136,37 +146,38 @@ public class HTTPMethod {
                 try {
                     reader.close();
                 } catch (Exception e) {
-                    Log.printStackTrace(e);
+                    Log.e(TAG, String.format("%s : %s", new Object(){}.getClass().getEnclosingMethod().getName(), e.getMessage()));
                 }
             }
         }
-        return jsonObject;
+        return jsonObject != null ? jsonObject : errorObj();
     }
+
     /**
      * Method allows to HTTP PUT request to the server to put data to a specified resource
-     * @param REQUEST_URL URL of the API to be requested
-     * @param PARAMS parameter that are to be send in the "body" of the request Ex: parameter=value&amp;also=another
-     * returns response as a JSON object
+     *
+     * @param requestUrl URL of the API to be requested
+     * @param params     parameter that are to be send in the "body" of the request Ex: parameter=value&amp;also=another
+     *                   returns response as a JSON object
      */
-    public JSONObject put(String REQUEST_URL,Map<String, Object> PARAMS) {
-        Log.e("----",REQUEST_URL);
+    public JSONObject PUT(String requestUrl, Map<String, Object> params) {
+        Log.e("----", requestUrl);
         JSONObject jsonObject = null;
         BufferedReader reader = null;
         try {
-            URL url = new URL(REQUEST_URL);
+            URL url = new URL(requestUrl);
             StringBuilder postData = new StringBuilder();
 
-            for (Map.Entry<String, Object> param : PARAMS.entrySet()) {
+            for (Map.Entry<String, Object> param : params.entrySet()) {
                 if (postData.length() != 0) postData.append('&');
                 postData.append(URLEncoder.encode(param.getKey(), "UTF-8"));
                 postData.append('=');
                 postData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
             }
-            Log.e("put",postData.toString());
+            Log.e("put", postData.toString());
             byte[] postDataBytes = postData.toString().getBytes("UTF-8");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            connection.setRequestProperty("Auth-User", mEmail);
             connection.setRequestProperty("Auth-Token", mToken);
             connection.setConnectTimeout(ConnectTimeout);
             connection.setRequestMethod("PUT");
@@ -184,7 +195,6 @@ public class HTTPMethod {
                     sb.append(line);
                 }
                 jsonObject = new JSONObject(sb.toString());
-                Log.e("1111",jsonObject.toString());
             }
             connection.disconnect();
         } catch (Exception e) {
@@ -194,25 +204,27 @@ public class HTTPMethod {
                 try {
                     reader.close();
                 } catch (Exception e) {
-                    Log.printStackTrace(e);
+                    Log.e(TAG, String.format("%s : %s", new Object(){}.getClass().getEnclosingMethod().getName(), e.getMessage()));
                 }
             }
         }
-        return jsonObject;
+        return jsonObject != null ? jsonObject : errorObj();
     }
+
     /**
      * Method allows to HTTP DELETE request to the server
-     * @param REQUEST_URL URL of the API to be requested
-     * returns response as a JSON object
+     *
+     * @param requestUrl URL of the API to be requested
+     *                   returns response as a JSON object
      */
-    public JSONObject delete(String REQUEST_URL) {
+    public JSONObject DELETE(String requestUrl) {
+
         JSONObject jsonObject = null;
         BufferedReader reader = null;
         try {
-            URL url = new URL(REQUEST_URL);
+            URL url = new URL(requestUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            connection.setRequestProperty("Auth-User", mEmail);
             connection.setRequestProperty("Auth-Token", mToken);
             connection.setConnectTimeout(ConnectTimeout);
             connection.setRequestMethod("DELETE");
@@ -238,10 +250,22 @@ public class HTTPMethod {
                 try {
                     reader.close();
                 } catch (Exception e) {
-                    Log.printStackTrace(e);
+                    Log.e(TAG, String.format("%s : %s", new Object(){}.getClass().getEnclosingMethod().getName(), e.getMessage()));
                 }
             }
         }
-        return jsonObject;
+        return jsonObject != null ? jsonObject : errorObj();
+    }
+
+    private JSONObject errorObj() {
+        JSONObject errObj = new JSONObject();
+        try {
+            errObj.put("status", false);
+            errObj.put("code", 500);
+            errObj.put("message", mContext.getString(R.string.server_error) );
+        } catch (JSONException e) {
+            Log.e(TAG, String.format("%s : %s", new Object(){}.getClass().getEnclosingMethod().getName(), e.getMessage()));
+        }
+        return errObj;
     }
 }

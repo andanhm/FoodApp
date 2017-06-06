@@ -29,39 +29,32 @@ public class MainActivity extends AppCompatActivity {
     Activity mActivity;
     Utility mUtility;
     public static List<FoodData> mCartItemList;
+
     @SuppressLint("CommitTransaction")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.client_activity_main);
-        mActivity=MainActivity.this;
-        mUtility=new Utility(mActivity);
-        mCartItemList=new ArrayList<>();
-        /**
-         *Setup the DrawerLayout and NavigationView
-         */
-
+        mActivity = MainActivity.this;
+        mUtility = new Utility(mActivity);
+        mCartItemList = new ArrayList<>();
+        //Setup the DrawerLayout and NavigationView
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mNavigationView = (NavigationView) findViewById(R.id.navigationView);
 
-        /**
-         * Lets inflate the very first fragment
-         * Here , we are inflating the TabFragment as the first Fragment
-         */
-
+        // Lets inflate the very first fragment
+        //Here , we are inflating the TabFragment as the first Fragment
         mFragmentManager = getSupportFragmentManager();
         mFragmentTransaction = mFragmentManager.beginTransaction();
         mFragmentTransaction.replace(R.id.containerView, new FoodFragment()).commit();
-        /**
-         * Setup click events on the Navigation View Items.
-         */
+        //Setup click events on the Navigation View Items.
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 mDrawerLayout.closeDrawers();
-                switch (menuItem.getItemId()){
+                switch (menuItem.getItemId()) {
                     case R.id.menuMyHome:
-                        Intent mIntent=new Intent(mActivity,MainActivity.class);
+                        Intent mIntent = new Intent(mActivity, MainActivity.class);
                         mIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(mIntent);
                         break;
@@ -83,10 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        /**
-         * Setup Drawer Toggle of the Toolbar
-         */
-
+        //Setup Drawer Toggle of the Toolbar
         mToolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         assert mToolbar != null;
         mToolbar.setTitle(R.string.toolbar_title);
